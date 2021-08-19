@@ -1,0 +1,45 @@
+<app-quiz *ngIf="!quizStarted" (quizzesChanged)="updateQuizList()"></app-quiz>
+<div *ngIf="!quizStarted">
+  <label for="qIndex">Choose Quiz from Pulldown</label>
+  <select [(ngModel)]="quizIndex">
+    <option name="qIndex" *ngFor="let a of quizzes" [ngValue]="a.id - 1">#: {{a.id}}, Category: {{a.category}}, Difficulty: {{a.difficulty}}</option>
+  </select>
+</div>
+
+<div *ngIf="!quizStarted" style="margin: 1em">
+<button style="margin-right: 1em" class="btn btn-primary" (click)="startQuiz();" 
+[disabled]="questionsAnswered != 0">Take Selected Quiz!</button>
+</div>
+
+<h2 *ngIf="givenQuestion.id && questionsAnswered < 10">Quiz Question {{ questionsAnswered + 1 }}</h2>
+<div *ngIf="givenQuestion.id && givenQuestion.type !== 'Fill' && questionsAnswered < 10">
+  <p>{{givenQuestion.qstring}}</p>
+  <form name="my-quiz-form-multiple" #myForm="ngForm" (ngSubmit)="submittedAnswer(myForm.value);">
+    <ol>
+      <li *ngFor="let a of questionAnswers">
+        <input type="radio" value="{{a.id}}" name="quizAnswer" id={{a.id}} ngModel>
+        <label for="{{a.answer}}" style="color: white">{{a.answer}}</label>
+      </li>
+    </ol>
+    <button class="btn btn-secondary" type="submit">Submit Answer</button>
+  </form>
+</div>
+<div *ngIf="givenQuestion.id && givenQuestion.type === 'Fill' && questionsAnswered < 10">
+  {{givenQuestion.qstring}}
+  <form name="my-quiz-form-fill" #myFormFill (ngSubmit)="submittedFillAnswer()">
+      <input type="text" [(ngModel)]="answeredQuestion" value="text" name="quizAnswer">
+    <button class="btn btn-secondary" style="margin-left: 1em" type="submit">Submit Answer</button>
+  </form>
+</div>
+<div *ngIf="questionsAnswered >= 10">
+  <h2>You received {{numberOfCorrectAnswers}} / 10!</h2>
+  <ol>
+    <li *ngFor="let r of quizResults;let i=index">
+      <p *ngIf="r.correct else wrong">
+        Correct! Answered: {{r.userAnswer}}</p>
+      <ng-template #wrong>
+        Wrong!   Answered: <p>{{r.userAnswer}} , Correct Answer: {{correctAnswers[i].answer}}</p>
+      </ng-template>
+    </li>
+  </ol>
+</div>
