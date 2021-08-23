@@ -51,7 +51,6 @@ export class TakeQuizComponent implements OnInit {
   }
 
   updateQuizList() {
-    console.log("updating quiz list");
     this.quizService.getQuizzes().subscribe(data => {
       this.quizzes = data;
     }, err => console.log(err));
@@ -59,7 +58,6 @@ export class TakeQuizComponent implements OnInit {
 
   //runs whenever quiz starts; quiz is picked at random from list
   startQuiz() {
-    console.log(this.quizzes)
     //this.quizIndex = Math.floor((Math.random() * this.quizzes.length));
     if (this.quizIndex == -1) {
       this.quizIndex = 0;
