@@ -29,7 +29,6 @@ export class QuizService {
   }
 
   getRandomQuiz(quiz: Quiz): Observable<Quiz> {
-    console.log('getRandomQuiz');
     return this.http.post<Quiz>(`${environment.apiUrl}/api/Quizzes/Random`, quiz, httpOptions)
       .pipe(catchError(error => {
         console.log('error:');
@@ -41,7 +40,6 @@ export class QuizService {
   }
 
   getUserQuizzes(user: Account): Observable<UserQuiz[]> {
-    console.log(user.userId);
     return this.http.get<UserQuiz[]>(`${environment.apiUrl}/api/Users/${user.userId}/Quizzes?userId=${user.userId}`)
     .pipe(catchError(error => {
       console.log('error:');
