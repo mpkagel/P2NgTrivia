@@ -15,9 +15,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class QuestionsService {
-
-  // for now, let's just grab all quizzes
-  // public QUIZZES_API = `${this.API}/Quizzes`;
   constructor(private http: HttpClient) { }
   getQuestions(quiz: Quiz): Observable<Question[]> {
     return this.http.post<Question[]>(`${environment.apiUrl}/api/Quizzes`, quiz, httpOptions)

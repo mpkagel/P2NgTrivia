@@ -13,8 +13,6 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class QuizService {
-  // for now, let's just grab all quizzes
-  // public QUIZZES_API = `${this.API}/Quizzes`;
   constructor(private http: HttpClient) { }
 
   randomQuiz: Quiz = new Quiz();

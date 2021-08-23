@@ -22,25 +22,19 @@ export class QuizListComponent implements OnInit {
 
   ngOnInit() {
     this.quizService.getQuizzes().subscribe(data => {
-      console.log(data);
       this.quizzes = data;
     }, err => console.log(err));
     if (sessionStorage.getItem('account') !== null) {
-      console.log(sessionStorage.getItem('account'));
-      console.log("got stored account info");
       this.user = JSON.parse(<string>sessionStorage.getItem('account'));
-      console.log(this.user.userId);
     }
   }
 
   getQuestions(quiz : Quiz) { this.questionsService.getQuestions(quiz).subscribe(data => {
-    console.log(data);
     this.questions = data;
   }, err => console.log(err));}
 
   getUserQuizzes(user: Account) {
       this.quizService.getUserQuizzes(user).subscribe(data => {
-      console.log(data);
       this.userQuizzes = data;
     }, err => console.log(err));
   } 

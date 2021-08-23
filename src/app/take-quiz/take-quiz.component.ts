@@ -54,7 +54,6 @@ export class TakeQuizComponent implements OnInit {
     console.log("updating quiz list");
     this.quizService.getQuizzes().subscribe(data => {
       this.quizzes = data;
-      console.log(data);
     }, err => console.log(err));
   }
 
@@ -65,9 +64,7 @@ export class TakeQuizComponent implements OnInit {
     if (this.quizIndex == -1) {
       this.quizIndex = 0;
     }
-    console.log('this.quizIndex: ' + this.quizIndex);
     this.makeUserQuiz(this.quizzes[this.quizIndex]);
-    console.log(this.quizzes[this.quizIndex]);
     this.getQuestions(this.quizzes[this.quizIndex]);
     this.questionsAnswered = 0;
     this.numberOfCorrectAnswers = 0;
@@ -120,11 +117,8 @@ export class TakeQuizComponent implements OnInit {
     this.sendResult(this.selectedAnswer);
  
     this.getCorrectAnswer(this.questionAnswers);
-    console.log(this.questionsAnswered);
-    console.log(this.correctAnswer);
     this.correctAnswers[this.questionsAnswered] = new Answer();
     this.correctAnswers[this.questionsAnswered].copyAnswer(this.correctAnswer);
-    console.log(this.correctAnswers[this.questionsAnswered]);
 
     this.questionsAnswered++;
     if (this.questionsAnswered < this.quizzes[this.quizIndex].maxScore)
@@ -154,11 +148,8 @@ export class TakeQuizComponent implements OnInit {
     this.sendResultString(this.answeredQuestion);
     
     this.getCorrectAnswer(this.questionAnswers);
-    console.log(this.questionsAnswered);
-    console.log(this.correctAnswer);
     this.correctAnswers[this.questionsAnswered] = new Answer();
     this.correctAnswers[this.questionsAnswered].copyAnswer(this.correctAnswer);
-    console.log(this.correctAnswers[this.questionsAnswered]);
 
     this.questionsAnswered++;
     if (this.questionsAnswered < 10)
@@ -213,7 +204,6 @@ export class TakeQuizComponent implements OnInit {
 
   setUserQuizScore(score: number){
     this.takeQuizService.updateMaxUserQuizScore(score).subscribe(data => {
-      console.log(data);
       }, err => console.log(err));
   }
   
