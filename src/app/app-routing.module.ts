@@ -8,9 +8,9 @@ import { TakeQuizComponent } from './take-quiz/take-quiz.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', component: DashboardComponent },
   { path: 'quiz-list', component: QuizListComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent },
+  // { path: 'dashboard', component: DashboardComponent },
   { path: 'take-quiz', component: TakeQuizComponent, canActivate: [AuthGuard] }
 
 ];

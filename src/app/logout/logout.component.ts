@@ -24,7 +24,7 @@ export class LogoutComponent implements OnInit {
 
   onSubmit() {
     this.api.logout().subscribe(() => {
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/'])
         .then(() => {
           window.location.reload();
         });
