@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.api.login(this.login).then((account: Account) => {
+    this.api.login(this.login).then((account: Account) => {      
       this.router.navigate(['/quiz-list'])
         .then(() => {
           window.location.reload();

@@ -24,11 +24,16 @@ export class LoginService {
     }).toPromise();
     // then, send request to details
     const url2 = `${environment.apiUrl}/api/Users/Details`;
-    const account = await this.http.get<Account>(url2, { withCredentials: true }).toPromise();
+    const account = await this.http.get<Account>(url2, { 
+      withCredentials: true 
+    }).toPromise();    
+
+    sessionStorage.setItem('account', JSON.stringify(account));
+
+    return account;
     // when we get that, save in session storage the logged in user's info
     // (so if client refreshes page, we still have it)
-    sessionStorage.setItem('account', JSON.stringify(account));
+
     // return the account details to the one calling this method
-    return account;
   }
 }
