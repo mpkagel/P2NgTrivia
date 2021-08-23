@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
-// import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-info',
@@ -13,17 +12,11 @@ export class LoginInfoComponent implements OnInit {
   role: string = "";
   id: number | null = null;
 
-  constructor(private loginService: LoginService) {}//,
-    // private cookieService: CookieService) { }
+  constructor(private loginService: LoginService) {
+
+  }
 
   ngOnInit() {
-    // if (this.cookieService.get('Project2')) {
-    //   console.log("Found cookie");
-    // }
-
-
-
-
     if ('account' in sessionStorage && sessionStorage.getItem('account') != 'null') {
       if (!JSON.parse(<string>sessionStorage.getItem('account'))['userId']) {
         this.id = -1;
@@ -44,7 +37,5 @@ export class LoginInfoComponent implements OnInit {
       this.loginService.id = this.id;
       this.loginService.username = this.username;
     } 
-      
-     
   }
 }
